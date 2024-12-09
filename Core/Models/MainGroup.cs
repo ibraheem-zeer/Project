@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    internal class MainGroup
+    public class MainGroup
     {
         public int Id { get; set; }
         public string Name { get; set; }

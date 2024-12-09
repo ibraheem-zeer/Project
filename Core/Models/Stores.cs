@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    public class Zones
+    public class Stores
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
         public int GovermmentsId { get; set; }
         public int CitiesId { get; set; }
+        public int ZonesId { get; set; }
 
         public Govermments Govermments { get; set; }
         public Cities Cities { get; set; }
-        public ICollection<Users> Users { get; set; } = new HashSet<Users>();
-        public ICollection<Stores> Stores { get; set; } = new HashSet<Stores>();
+        public Zones Zones { get; set; }
+
+        public ICollection<ItemsStores> ItemsStores { get; set; } = new HashSet<ItemsStores>();
+        public ICollection<ShoppingCartItems> ShoppingCartItems { get; set; } = new HashSet<ShoppingCartItems>();
     }
 }
