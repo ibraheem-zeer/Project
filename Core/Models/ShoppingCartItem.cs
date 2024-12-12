@@ -7,25 +7,24 @@ using System.Threading.Tasks;
 
 namespace Core.Models
 {
-    public class ShoppingCartItems
+    public class ShoppingCartItem
     {
         [ForeignKey(nameof(Users))]
-        public int CusId { get; set; }
-        [ForeignKey(nameof(Items))]
-        public int ItemId { get; set; }
-        [ForeignKey(nameof(Stores))]
-        public int StoreId { get; set; }
+        public int Cus_Id { get; set; }
 
-        //=========================================
+        [ForeignKey(nameof(Items))]
+        public int ItemCode { get; set; }
+
+        [ForeignKey(nameof(Stores))]
+        public int Store_Id { get; set; }
         public double Quantity { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
         public double Factor { get; set; }
-        public int UnitCode { get; set; }
+        public int U_Code { get; set; }
 
-        //=========================================
         public Users Users { get; set; }
-        public Items Items { get; set; }
         public Stores Stores { get; set; }
+        public Items Items { get; set; }
     }
 }

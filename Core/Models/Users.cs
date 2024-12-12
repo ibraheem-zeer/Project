@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,15 +15,26 @@ namespace Core.Models
         [MaxLength(100)]
         public string FullName { get; set; }
 
-        public int GovermmentsId { get; set; }
-        public int CitiesId { get; set; }
-        public int ZonesId { get; set; }
-        public int ClassificationsId { get; set; }
+        [ForeignKey(nameof(Governments))]
+        public int Government_Code { get; set; }
 
-        public Govermments Govermments { get; set; }
+        [ForeignKey(nameof(Cities))]
+        public int City_Code { get; set; }
+
+        [ForeignKey(nameof(Zones))]
+        public int Zone_Code { get; set; }
+
+        [ForeignKey(nameof(Classifications))]
+        public int Cus_ClassId { get; set; }
+
+
+        public ICollection<Invoices> Invoices { get; set; } = new HashSet<Invoices>();
+        public ICollection<ShoppingCartItem> ShoppingCartItem { get; set; } = new HashSet<ShoppingCartItem>();
+        public Governments Governments { get; set; }
         public Cities Cities { get; set; }
         public Zones Zones { get; set; }
         public Classifications Classifications { get; set; }
-        
+
+
     }
 }

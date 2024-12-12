@@ -9,17 +9,18 @@ namespace Core.Models
 {
     public class ItemsStores
     {
-        public double Balance { get; set; }
-        public int Factor { get; set; }
-        public int ReservedQuantity { get; set; }
-        public DateTime LastUpdated { get; set; }
+        [ForeignKey(nameof(Stores))]
+        public int StoreId { get; set; } // Foreign key for Stores
+        public Stores Stores { get; set; }
 
         [ForeignKey(nameof(Items))]
-        public int ItemId { get; set; }
-        [ForeignKey(nameof(Stores))]
-        public int StoreId { get; set; }
-
+        public int ItemId { get; set; } // Foreign key for Items
         public Items Items { get; set; }
-        public Stores Stores { get; set; }
+
+        public double Balance { get; set; } // Example additional column
+        public double ReservedQuantity { get; set; }
+        public double Factor { get; set; }
+
+        public DateTime LastUpdated { get; set; } = DateTime.Now; // Example column
     }
 }

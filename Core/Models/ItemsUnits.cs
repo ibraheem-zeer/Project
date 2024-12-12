@@ -9,13 +9,13 @@ namespace Core.Models
 {
     public class ItemsUnits
     {
-        public int Factor {  get; set; }
-
         [ForeignKey(nameof(Items))]
-        public int ItemId { get; set; }
-        [ForeignKey(nameof(Units))]
-        public int UnitId { get; set; }
+        public int ItemCode { get; set; }
 
+        [ForeignKey(nameof(Units))]
+        public int UnitCode { get; set; }
+
+        public double Factor { get; set; }
         public Items Items { get; set; }
         public Units Units { get; set; }
     }

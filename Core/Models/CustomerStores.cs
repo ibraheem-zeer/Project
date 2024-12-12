@@ -9,15 +9,14 @@ namespace Core.Models
 {
     public class CustomerStores
     {
-        public bool IsDefault { get; set; }
-        
         [ForeignKey(nameof(Users))]
-        public int CustomerId { get; set; }
-            
+        public int Cus_Id { get; set; }
+
         [ForeignKey(nameof(Stores))]
         public int StoreId { get; set; }
-        
+        public bool isDefault { get; set; }
         public Users Users { get; set; }
         public Stores Stores { get; set; }
+
     }
 }

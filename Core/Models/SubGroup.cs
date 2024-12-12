@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,12 @@ namespace Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int MainGroupId { get; set; }
 
+        [ForeignKey("MainGroup")]
+        public int MG_Id { get; set; }
         public MainGroup MainGroup { get; set; }
+
+        public ICollection<SubGroup2> SubGroup2 { get; set; } = new HashSet<SubGroup2>();
         public ICollection<Items> Items { get; set; } = new HashSet<Items>();
-        public ICollection<SubGroup2> SubGroups2 { get; set; } = new HashSet<SubGroup2>();
     }
 }
