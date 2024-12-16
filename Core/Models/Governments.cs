@@ -8,19 +8,13 @@ namespace Core.Models
 {
     public class Governments
     {
-        public int Id { get; set; } // Primary Key
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        // Navigation property for Cities
-
-        //Option 1: (Cascade) is useful if Cities must always be tied to a Government,
-        //but Zones can exist independently even if their Government is deleted.
-        //Option 2: (Restrict)  gives you full control over deletions,
-        //ensuring you handle related rows explicitly in your code.
-
+        public ICollection<Users> Users { get; set; } = new HashSet<Users>();
+        public ICollection<Zones> Zones { get; set; } = new HashSet<Zones>();
 
         public ICollection<Cities> Cities { get; set; } = new HashSet<Cities>();
-        public ICollection<Users> Users { get; set; } = new HashSet<Users>();
         public ICollection<Stores> Stores { get; set; } = new HashSet<Stores>();
     }
 }

@@ -1,130 +1,53 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<Users, IdentityRole<int>, int>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-//            base.OnModelCreating(builder);
+            base.OnModelCreating(builder);
 
-//            // Configure Many-to-Many relationship for Items and Stores
-//            builder.Entity<ItemsStores>()
-//                .HasKey(x => new { x.StoreId, x.ItemId });
+            builder.Entity<ItemsUnits>()
+                .HasKey(i => new { i.Unit_Id, i.Item_Id });
 
-//            builder.Entity<ItemsStores>()
-//                .HasOne(x => x.Stores)
-//                .WithMany(x => x.ItemsStores)
-//                .HasForeignKey(x => x.StoreId);
+            builder.Entity<CustomerStores>()
+                .HasKey(x => new { x.Store_Id, x.Cus_Id });
+            builder.Entity<InvItemStores>()
+                .HasKey(x => new { x.Store_Id, x.Item_Id });
+            builder.Entity<ShoppingCartItems>()
+                .HasKey(x => new { x.Store_Id, x.Item_Id, x.Cus_Id });
 
-//            builder.Entity<ItemsStores>()
-//                .HasOne(x => x.Items)
-//                .WithMany(x => x.ItemsStores)
-//                .HasForeignKey(x => x.ItemId);
+            builder.Entity<InvoiceDetails>()
+                .HasKey(x => new { x.Invoice_Id, x.Item_Id });
 
-//            // Configure One-to-Many relationships
-//            builder.Entity<Users>()
-//                .HasOne(u => u.Governments)
-//                .WithMany(g => g.Users)
-//                .HasForeignKey(u => u.Government_Code);
-
-//            builder.Entity<Users>()
-//                .HasOne(u => u.Cities)
-//                .WithMany(c => c.Users)
-//                .HasForeignKey(u => u.City_Code);
-
-//            builder.Entity<Users>()
-//                .HasOne(u => u.Zones)
-//                .WithMany(z => z.Users)
-//                .HasForeignKey(u => u.Zone_Code);
-
-//            builder.Entity<Users>()
-//                .HasOne(u => u.Classifications)
-//                .WithMany(c => c.Users)
-//                .HasForeignKey(u => u.Cus_ClassId);
-
-//            // Configure relationships for MainGroup, SubGroup, and SubGroup2
-//            builder.Entity<MainGroup>()
-//                .HasMany(m => m.SubGroup)
-//                .WithOne(s => s.MainGroup)
-//                .HasForeignKey(s => s.MG_Id);
-
-//            builder.Entity<SubGroup>()
-//                .HasMany(s => s.SubGroup2)
-//                .WithOne(s2 => s2.SubGroup)
-//                .HasForeignKey(s2 => s2.SG_Id);
-
-//            // Configure relationships for Items and Units
-//            builder.Entity<ItemsUnits>()
-//                .HasKey(iu => new { iu.ItemCode, iu.UnitCode });
-
-//            builder.Entity<ItemsUnits>()
-//                .HasOne(iu => iu.Items)
-//                .WithMany(i => i.ItemsUnits)
-//                .HasForeignKey(iu => iu.ItemCode);
-
-//            builder.Entity<ItemsUnits>()
-//                .HasOne(iu => iu.Units)
-//                .WithMany(u => u.ItemsUnits)
-//                .HasForeignKey(iu => iu.UnitCode);
-
-//            // Configure relationships for InvoiceDetails and Invoices
-//            builder.Entity<InvoiceDetail>()
-//                .HasOne(id => id.Invoices)
-//                .WithMany(i => i.InvoiceDetail)
-//                .HasForeignKey(id => id.InvoiceId);
-
-//            builder.Entity<InvoiceDetail>()
-//                .HasOne(id => id.Items)
-//                .WithMany(i => i.InvoiceDetail)
-//                .HasForeignKey(id => id.ItemCode);
-
-//            // Configure relationships for ShoppingCartItems
-//            builder.Entity<ShoppingCartItem>()
-//                .HasOne(sci => sci.Items)
-//                .WithMany(i => i.ShoppingCartItem)
-//                .HasForeignKey(sci => sci.ItemCode);
-
-//            builder.Entity<ShoppingCartItem>()
-//                .HasOne(sci => sci.Users)
-//                .WithMany(u => u.ShoppingCartItem)
-//                .HasForeignKey(sci => sci.U_Code);
-
-//            // Configure relationships for CustomerStores
-//            builder.Entity<CustomerStores>()
-//                .HasKey(cs => new { cs.Cus_Id, cs.StoreId });
-
-///*            builder.Entity<CustomerStores>()
-//                .HasOne(cs => cs.Users)
-//                .WithMany(u => u)
-//                .HasForeignKey(cs => cs.UserId);*/
-
-//            //builder.Entity<CustomerStores>()
-//            //    .HasOne(cs => cs.Stores)
-//            //    .WithMany(s => s.CustomerStores)
-//            //    .HasForeignKey(cs => cs.StoreId);
         }
 
-        // DbSet properties for all entities
+        public DbSet<Users> Users { get; set; }
         public DbSet<Cities> Cities { get; set; }
-        public DbSet<Zones> Zones { get; set; }
         public DbSet<Governments> Governments { get; set; }
-        public DbSet<Stores> Stores { get; set; }
-        public DbSet<Items> Items { get; set; }
-        public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
-        public DbSet<Invoices> Invoices { get; set; }
+        public DbSet<Zones> Zones { get; set; }
         public DbSet<Classifications> Classifications { get; set; }
-        public DbSet<ItemsStores> ItemsStores { get; set; }
-        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
-        public DbSet<ItemsUnits> ItemsUnits { get; set; }
         public DbSet<Units> Units { get; set; }
-        public DbSet<MainGroup> MainGroups { get; set; }
-        public DbSet<SubGroup> SubGroups { get; set; }
-        public DbSet<SubGroup2> SubGroup2s { get; set; }
+        public DbSet<Items> Items { get; set; }
+        public DbSet<MainGroup> MainGroup { get; set; }
+        public DbSet<SubGroup> SubGroup { get; set; }
+        public DbSet<SubGroup2> SubGroup2 { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<InvoiceDetails> InvoiceDetails { get; set; }
+        public DbSet<ShoppingCartItems> ShoppingCartItems { get; set; }
+        public DbSet<InvItemStores> InvItemStores { get; set; }
+        public DbSet<ItemsUnits> ItemsUnits { get; set; }
         public DbSet<CustomerStores> CustomerStores { get; set; }
+        public DbSet<Stores> Stores { get; set; }
     }
 }

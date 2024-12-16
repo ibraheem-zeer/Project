@@ -10,26 +10,26 @@ namespace Core.Models
     public class Items
     {
         public int Id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public double price { get; set; }
 
         [ForeignKey(nameof(MainGroup))]
-        public int? MG_Id { get; set; }
-
+        public int MG_Id { get; set; }
 
         [ForeignKey(nameof(SubGroup))]
-        public int SG_Id { get; set; }
+        public int Sub_Id { get; set; }
 
 
         [ForeignKey(nameof(SubGroup2))]
-        public int? SG2_Id { get; set; }
-        public SubGroup SubGroup { get; set; }
+
+        public int Sub2_Id { get; set; }
+
         public MainGroup MainGroup { get; set; }
+        public SubGroup SubGroup { get; set; }
         public SubGroup2 SubGroup2 { get; set; }
-        public ICollection<InvoiceDetail> InvoiceDetail { get; set; } = new HashSet<InvoiceDetail>();
-        public ICollection<ShoppingCartItem> ShoppingCartItem { get; set; } = new HashSet<ShoppingCartItem>();
+        public ICollection<InvItemStores> InvItemStores { get; set; }
         public ICollection<ItemsUnits> ItemsUnits { get; set; } = new HashSet<ItemsUnits>();
-        public ICollection<ItemsStores> ItemsStores { get; set; } = new HashSet<ItemsStores>();
+
     }
 }

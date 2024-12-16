@@ -10,24 +10,23 @@ namespace Core.Models
     public class Stores
     {
         public int Id { get; set; }
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [ForeignKey(nameof(Governments))]
-        public int Government_Code { get; set; }
-        public Governments Governments { get; set; }
+        public int Gov_Id { get; set; }
 
         [ForeignKey(nameof(Cities))]
-        public int City_Code { get; set; }
-        public Cities Cities { get; set; }
+        public int City_Id { get; set; }
 
         [ForeignKey(nameof(Zones))]
-        public int Zone_Code { get; set; }
+        public int Zone_Id { get; set; }
+
+        public Governments Governments { get; set; }
+        public Cities Cities { get; set; }
         public Zones Zones { get; set; }
 
-        //public ICollection<Items> Items { get; set; } = new HashSet<Items>();
+        public ICollection<InvItemStores> InvItemStores { get; set; } = new HashSet<InvItemStores>();
+        public ICollection<CustomerStores> CustomerStores { get; set; } = new HashSet<CustomerStores>();
 
-        public ICollection<ShoppingCartItem> ShoppingCartItem { get; set; } = new HashSet<ShoppingCartItem>();
-
-        public ICollection<ItemsStores> ItemsStores { get; set; } = new HashSet<ItemsStores>();
     }
 }

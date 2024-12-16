@@ -10,9 +10,12 @@ namespace Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<Items> Items { get; set; } = new HashSet<Items>();
         public ICollection<SubGroup> SubGroup { get; set; } = new HashSet<SubGroup>();
         public ICollection<SubGroup2> SubGroup2 { get; set; } = new HashSet<SubGroup2>();
-        public ICollection<Items> Items { get; set; } = new HashSet<Items>();
+
+
 
     }
 }

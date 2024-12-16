@@ -9,19 +9,14 @@ namespace Core.Models
 {
     public class Cities
     {
-        public int Id { get; set; } // Primary Key
+        public int Id { get; set; }
         public string Name { get; set; }
 
-        // Foreign key for Governments
         [ForeignKey(nameof(Governments))]
-        public int Gov_Code { get; set; }
-
-        // Navigation property for Governments
+        public int Gov_Id { get; set; }
         public Governments Governments { get; set; }
-
-        // Navigation property for Zones
-        public ICollection<Zones> Zones { get; set; } = new HashSet<Zones>();
         public ICollection<Users> Users { get; set; } = new HashSet<Users>();
+        public ICollection<Zones> Zones { get; set; } = new HashSet<Zones>();
         public ICollection<Stores> Stores { get; set; } = new HashSet<Stores>();
     }
 }
