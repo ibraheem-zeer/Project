@@ -12,7 +12,7 @@ namespace Core.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [ForeignKey(nameof(MainGroup))]
+        [ForeignKey("MainGroup")]
         public int MG_Id { get; set; }
         public MainGroup MainGroup { get; set; }
 

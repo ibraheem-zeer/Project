@@ -11,16 +11,16 @@ namespace Core.Models
 {
     public class Users : IdentityUser<int>
     {
-        [ForeignKey(nameof(Governments))]
+        [ForeignKey("Governments")]
         public int Gov_Id { get; set; }
 
-        [ForeignKey(nameof(Cities))]
+        [ForeignKey("Cities")]
         public int City_Id { get; set; }
 
-        [ForeignKey(nameof(Zones))]
+        [ForeignKey("Zones")]
         public int Zone_Id { get; set; }
 
-        [ForeignKey(nameof(Classifications))]
+        [ForeignKey("Classifications")]
         public int Class_Id { get; set; }
 
         public Classifications Classifications { get; set; }

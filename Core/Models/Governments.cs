@@ -14,6 +14,7 @@ namespace Core.Models
         public ICollection<Users> Users { get; set; } = new HashSet<Users>();
         public ICollection<Zones> Zones { get; set; } = new HashSet<Zones>();
 
+
         public ICollection<Cities> Cities { get; set; } = new HashSet<Cities>();
         public ICollection<Stores> Stores { get; set; } = new HashSet<Stores>();
     }

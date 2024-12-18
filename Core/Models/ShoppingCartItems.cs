@@ -9,21 +9,21 @@ namespace Core.Models
 {
     public class ShoppingCartItems
     {
-        [ForeignKey(nameof(Items))]
+        [ForeignKey("Items")]
         public int Item_Id { get; set; }
 
-        [ForeignKey(nameof(Users))]
+        [ForeignKey("Users")]
         public int? Cus_Id { get; set; }
 
-        [ForeignKey(nameof(Stores))]
+        [ForeignKey("Stores")]
         public int Store_Id { get; set; }
 
         public double Quantity { get; set; }
         public int Unit_Id { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
         public DateTime? UpdatedAt { get; set; }
+
         public Users Users { get; set; }
         public Stores Stores { get; set; }
         public Items Items { get; set; }

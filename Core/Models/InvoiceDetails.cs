@@ -9,10 +9,10 @@ namespace Core.Models
 {
     public class InvoiceDetails
     {
-        [ForeignKey(nameof(Invoice))]
+        [ForeignKey("Invoice")]
         public int Invoice_Id { get; set; }
 
-        [ForeignKey(nameof(Items))]
+        [ForeignKey("Items")]
         public int Item_Id { get; set; }
 
         public int price { get; set; }

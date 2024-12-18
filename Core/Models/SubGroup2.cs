@@ -11,14 +11,16 @@ namespace Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
-        [ForeignKey(nameof(MainGroup))]
-        public int MG_Id { get; set; }
-
-        [ForeignKey(nameof(SubGroup))]
-        public int Sub_Id { get; set; }
         public ICollection<Items> Items { get; set; } = new HashSet<Items>();
+
+
+        [ForeignKey("MainGroup")]
+        public int MG_Id { get; set; }
         public MainGroup MainGroup { get; set; }
+        
+        
+        [ForeignKey("SubGroup")]
+        public int Sub_Id { get; set; }
         public SubGroup SubGroup { get; set; }
     }
 }

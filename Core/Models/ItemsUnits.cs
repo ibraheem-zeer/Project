@@ -9,10 +9,10 @@ namespace Core.Models
 {
     public class ItemsUnits
     {
-        [ForeignKey(nameof(Items))]
+        [ForeignKey("Items")]
         public int Item_Id { get; set; }
 
-        [ForeignKey(nameof(Units))]
+        [ForeignKey("Units")]
         public int Unit_Id { get; set; }
 
         public int Factor { get; set; }

@@ -11,7 +11,7 @@ namespace Core.Models
     {
         public int Id { get; set; }
 
-        [ForeignKey(nameof(Users))]
+        [ForeignKey("Users")]
         public int Cus_Id { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }

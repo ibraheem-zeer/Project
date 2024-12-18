@@ -12,7 +12,7 @@ namespace Core.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [ForeignKey(nameof(Governments))]
+        [ForeignKey("Governments")]
         public int Gov_Id { get; set; }
         public Governments Governments { get; set; }
         public ICollection<Users> Users { get; set; } = new HashSet<Users>();

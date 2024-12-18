@@ -9,10 +9,10 @@ namespace Core.Models
 {
     public class CustomerStores
     {
-        [ForeignKey(nameof(Users))]
+        [ForeignKey("Users")]
         public int Cus_Id { get; set; }
 
-        [ForeignKey(nameof(Stores))]
+        [ForeignKey("Stores")]
         public int Store_Id { get; set; }
 
         public Users Users { get; set; }

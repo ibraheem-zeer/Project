@@ -12,13 +12,13 @@ namespace Core.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [ForeignKey(nameof(Governments))]
+        [ForeignKey("Governments")]
         public int Gov_Id { get; set; }
 
-        [ForeignKey(nameof(Cities))]
+        [ForeignKey("Cities")]
         public int City_Id { get; set; }
 
-        [ForeignKey(nameof(Zones))]
+        [ForeignKey("Zones")]
         public int Zone_Id { get; set; }
 
         public Governments Governments { get; set; }

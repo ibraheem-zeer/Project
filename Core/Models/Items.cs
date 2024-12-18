@@ -14,16 +14,16 @@ namespace Core.Models
         public string Description { get; set; }
         public double price { get; set; }
 
-        [ForeignKey(nameof(MainGroup))]
+
+        [ForeignKey("MainGroup")]
         public int MG_Id { get; set; }
 
-        [ForeignKey(nameof(SubGroup))]
+        [ForeignKey("SubGroup")]
         public int Sub_Id { get; set; }
 
-
-        [ForeignKey(nameof(SubGroup2))]
-
+        [ForeignKey("SubGroup2")]
         public int Sub2_Id { get; set; }
+
 
         public MainGroup MainGroup { get; set; }
         public SubGroup SubGroup { get; set; }

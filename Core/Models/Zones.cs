@@ -17,14 +17,14 @@ namespace Core.Models
         
         
         
-        [ForeignKey(nameof(Governments))]
+        [ForeignKey("Governments")]
         public int Gov_Id { get; set; }
-        public Governments Government { get; set; }
+        public Governments Governments { get; set; }
         
         
         
-        [ForeignKey(nameof(Cities))]
+        [ForeignKey("Cities")]
         public int City_Id { get; set; }
-        public Cities City { get; set; }
+        public Cities Cities { get; set; }
     }
 }
