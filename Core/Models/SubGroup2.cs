@@ -24,3 +24,8 @@ namespace Core.Models
         public SubGroup SubGroup { get; set; }
     }
 }
+/*
+Introducing FOREIGN KEY constraint 'FK_SubGroup2_SubGroup_Sub_Id' on table 'SubGroup2' may cause cycles or multiple cascade paths.
+Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+Could not create constraint or index. See previous errors. 
+*/
