@@ -18,6 +18,7 @@ namespace Infrastructure.Data
             base.OnModelCreating(builder);
 
             builder.Entity<Governments>().HasMany(x => x.Zones).WithOne(x => x.Governments).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<SubGroup>().HasMany(x => x.SubGroup2).WithOne(x => x.SubGroup).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ItemsUnits>()
                 .HasKey(i => new { i.Unit_Id, i.Item_Id });
