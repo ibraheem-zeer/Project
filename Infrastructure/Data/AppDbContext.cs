@@ -29,6 +29,8 @@ namespace Infrastructure.Data
 
 
             builder.Entity<SubGroup>().HasMany(x => x.SubGroup2).WithOne(x => x.SubGroup).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<SubGroup>().HasMany(x => x.Items).WithOne(x => x.SubGroup).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<SubGroup2>().HasMany(x => x.Items).WithOne(x => x.SubGroup2).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ItemsUnits>()
                 .HasKey(i => new { i.Unit_Id, i.Item_Id });
