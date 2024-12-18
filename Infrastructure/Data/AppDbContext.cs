@@ -22,7 +22,7 @@ namespace Infrastructure.Data
             builder.Entity<Governments>().HasMany(x => x.Cities).WithOne(x => x.Governments).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Zones>().HasMany(x => x.Users).WithOne(x => x.Zones).OnDelete(DeleteBehavior.Restrict);
-            builder.Entity<Stores>().HasMany(x => x.Zones).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Zones>().HasMany(x => x.Stores).WithOne(x => x.Zone).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Cities>().HasMany(x => x.Users).WithOne(x => x.Cities).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Classifications>().HasMany(x => x.Users).WithOne(x => x.Classifications).OnDelete(DeleteBehavior.Restrict);
