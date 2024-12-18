@@ -18,3 +18,6 @@ namespace Core.Models
         public ICollection<Stores> Stores { get; set; } = new HashSet<Stores>();
     }
 }
+
+
+

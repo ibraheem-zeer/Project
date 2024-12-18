@@ -11,12 +11,20 @@ namespace Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        
+        public ICollection<Users> Users { get; set; } = new HashSet<Users>();
+        
+        
+        
         [ForeignKey(nameof(Governments))]
         public int Gov_Id { get; set; }
+        public Governments Government { get; set; }
+        
+        
+        
         [ForeignKey(nameof(Cities))]
         public int City_Id { get; set; }
-        public ICollection<Users> Users { get; set; } = new HashSet<Users>();
-        public Governments Governments { get; set; }
-        public Cities Cities { get; set; }
+        public Cities City { get; set; }
     }
 }
