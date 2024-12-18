@@ -1,6 +1,8 @@
 
+using Core.Interfaces;
 using Core.Models;
 using Infrastructure.Data;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,13 +25,19 @@ namespace Project
                 {
                     options.UseSqlServer(builder.Configuration.GetConnectionString("Def"));
                 });
-            builder.Services.AddIdentity<Users, IdentityRole<int>>(options =>
+
+            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
+            // here we use the AddIdentity for use userManager , and we use AddEntityFreameworkStores
+            // why we add .AddEntityFreameworkStores : because we are use Interfaces and implementation we are used , the interfaces and implementation is inside the userManager
+            // so we cannot use it without .AddEntityFreameworkStores to add it's interfaces and implementations
+            builder.Services.AddIdentity<Users , IdentityRole<int>>(option =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredUniqueChars = 1;
+                option.Password.RequireDigit = true;
+                option.Password.RequireLowercase = true;
+                option.Password.RequireUppercase = true;
+                option.Password.RequireNonAlphanumeric = false;
+                //option.Password.RequiredUniqueChars = 0; // dosn't matter i think
             }).AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
