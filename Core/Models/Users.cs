@@ -29,9 +29,11 @@ namespace Core.Models
         public Governments Governments { get; set; }
         public Cities Cities { get; set; }
         public ICollection<CustomerStores> CustomerStores { get; set; } = new HashSet<CustomerStores>();
-
-
-
-
     }
 }
+
+/*
+Introducing FOREIGN KEY constraint 'FK_AspNetUsers_Governments_Gov_Id' on table 'AspNetUsers' may cause cycles or multiple cascade paths.
+Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or modify other FOREIGN KEY constraints.
+Could not create constraint or index. See previous errors. 
+*/
