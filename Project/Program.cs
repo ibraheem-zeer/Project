@@ -18,11 +18,19 @@ namespace Project
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddIdentity<Users, IdentityRole>();
-            builder.Services.AddDbContext<AppDbContext>(opt =>
+            builder.Services.AddDbContext<AppDbContext>(
+                options =>
+                {
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("Def"));
+                });
+            builder.Services.AddIdentity<Users, IdentityRole<int>>(options =>
             {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("Def"));
-            });
+                options.Password.RequireDigit = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 1;
+            }).AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
 

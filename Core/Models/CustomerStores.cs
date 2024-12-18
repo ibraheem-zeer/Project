@@ -20,4 +20,4 @@ namespace Core.Models
     }
 
 }
-}
+
