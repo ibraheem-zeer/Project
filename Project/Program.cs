@@ -27,6 +27,7 @@ namespace Project
                 });
 
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+            builder.Services.AddScoped<IItemsRepository, ItemsRepository>();
 
             // here we use the AddIdentity for use userManager , and we use AddEntityFrameworkStores
             // why we add .AddEntityFreameworkStores : because we are use Interfaces and implementation we are used , the interfaces and implementation is inside the userManager
