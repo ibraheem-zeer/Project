@@ -28,7 +28,7 @@ namespace Project.Controllers
                 Gov_Id = registerDTO.Gov_Code,
                 City_Id = registerDTO.City_Code,
                 Zone_Id = registerDTO.Zone_Code,
-                Class_Id = registerDTO.Cus_ClassId
+                Class_Id = registerDTO.Cus_ClassId,
             };
             var res = await authRepository.Register(user, registerDTO.Password);
             return Ok(res);
