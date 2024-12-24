@@ -1,7 +1,9 @@
 ﻿using Core.DTO_s;
 using Core.Interfaces;
+using Core.Mapping.ItemsMapping;
 using Core.Models;
 using Infrastructure.Data;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,18 +22,23 @@ namespace Infrastructure.Repositories
             this.context = context;
         }
 
-        public async Task<ICollection<ItemsDTO>> GetItems() => await context.Items
-            .Include(i => i.ItemsUnits)
-            .Select(x => new ItemsDTO
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Price = x.price,
-                ItemUnits = x.ItemsUnits.Select(iu => iu.Units.Name).ToList(),
-                Stores = x.InvItemStores.Select(st => st.Stores.Name).ToList(),
-            })
-            .ToListAsync();
-
-
+        //public async Task<ICollection<ItemsDTO>> GetItems() => await context.Items
+        //    .Include(i => i.ItemsUnits)
+        //    .Select(x => new ItemsDTO
+        //    {
+        //        Id = x.Id,
+        //        Name = x.Name,
+        //        Price = x.price,
+        //        ItemUnits = x.ItemsUnits.Select(iu => iu.Units.Name).ToList(),
+        //        Stores = x.InvItemStores.Select(st => st.Stores.Name).ToList(),
+        //    })
+        //    .ToListAsync();
+        
+        public async Task<ICollection<ItemsDTO>> GetItems()
+        {
+            var config = MappingProfile.config;
+            var items = await context.Items.ProjectToType<ItemsDTO>(config).ToListAsync();
+            return items;
+        }
     }
 }

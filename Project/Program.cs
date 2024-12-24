@@ -3,6 +3,7 @@ using Core.Interfaces;
 using Core.Models;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,9 @@ namespace Project
 
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
             builder.Services.AddScoped<IItemsRepository, ItemsRepository>();
+            var config = TypeAdapterConfig.GlobalSettings;
+            // here we use Singleton becouse we want from the object created just one so we need to create
+            builder.Services.AddSingleton(config);
 
             // here we use the AddIdentity for use userManager , and we use AddEntityFrameworkStores
             // why we add .AddEntityFreameworkStores : because we are use Interfaces and implementation we are used , the interfaces and implementation is inside the userManager
