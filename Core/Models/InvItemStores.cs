@@ -19,6 +19,6 @@ namespace Core.Models
         public int Factor { get; set; }
         public Items Items { get; set; }
         public Stores Stores { get; set; }
-        public DateTime LastUpdated { get; set; }
+        public DateTime? LastUpdated { get; set; }
     }
 }
