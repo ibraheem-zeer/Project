@@ -30,6 +30,7 @@ namespace Project
             builder.Services.AddScoped<IAuthRepository, AuthRepository>();
             builder.Services.AddScoped<IItemsRepository, ItemsRepository>();
             builder.Services.AddScoped<ICartRepository , CartRepository>();
+            builder.Services.AddScoped<IInvoiceRepository , IInvoiceRepository>();
             var config = TypeAdapterConfig.GlobalSettings;
             // here we use Singleton becouse we want from the object created just one so we need to create
             builder.Services.AddSingleton(config);
