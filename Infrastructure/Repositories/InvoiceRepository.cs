@@ -27,6 +27,7 @@ namespace Infrastructure.Repositories
 
             var unavailableItems = new List<string>();
             double totalNetPrice = 0;
+
             foreach(var item in carItems)
             {
                 var itemStore = await context.InvItemStores.FirstOrDefaultAsync(i => i.Item_Id == item.Item_Id && i.Store_Id == item.Store_Id);
@@ -141,7 +142,6 @@ namespace Infrastructure.Repositories
                     Quantity = si.Quantity,
                     TotalPrice = si.Quantity * si.price
                 }))
-
             };
             return reciept;
         }

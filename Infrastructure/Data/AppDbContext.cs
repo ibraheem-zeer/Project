@@ -27,6 +27,7 @@ namespace Infrastructure.Data
             builder.Entity<Cities>().HasMany(x => x.Users).WithOne(x => x.Cities).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<Classifications>().HasMany(x => x.Users).WithOne(x => x.Classifications).OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Invoice>().HasMany(x => x.Details).WithOne(x => x.Invoice).OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<SubGroup>().HasMany(x => x.SubGroup2).WithOne(x => x.SubGroup).OnDelete(DeleteBehavior.Restrict);
             builder.Entity<SubGroup>().HasMany(x => x.Items).WithOne(x => x.SubGroup).OnDelete(DeleteBehavior.Restrict);
