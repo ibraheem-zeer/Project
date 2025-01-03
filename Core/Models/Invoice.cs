@@ -22,6 +22,7 @@ namespace Core.Models
         public bool isReviewed { get; set; }
         public bool isClosed { get; set; }
 
+        public ICollection<InvoiceDetails> Details { get; set; } = new HashSet<InvoiceDetails>();
         public Users Users { get; set; }
     }
 }

@@ -38,7 +38,28 @@ namespace Project.Controllers
             {
                 return StatusCode(500, "Internal Server Error");
             }
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> GetReciept(int invId)
+        {
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer", "");
+            if (string.IsNullOrEmpty(token))
+            {
+                return Unauthorized("token not found");
+            }
+            try
+            {
+                var userId = ExtractClaims.ExtractUserId(token);
+                if (!userId.HasValue) return Unauthorized("Invalid user token");
+                var result = await invoiceRepository.GetInvoiceRecipt(userId.Value, invId);
+                if (result == null) return NotFound("Invoice not found");
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Server Error");
+            }
         }
     }
 }

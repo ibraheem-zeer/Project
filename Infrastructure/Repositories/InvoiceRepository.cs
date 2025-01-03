@@ -24,18 +24,6 @@ namespace Infrastructure.Repositories
         {
             var carItems = await context.ShoppingCartItems.Include(x => x.Items).Where(c => c.Cus_Id == cusId).ToListAsync();
             if (carItems == null || !carItems.Any()) return "No items in the cart";
-            Invoice invoice = new Invoice()
-            {
-                Cus_Id = cusId,
-                CreatedAt = DateTime.Now,
-                NetPrice = 0,
-                Transaction_Type = 1,
-                Payment_Type = 1,
-                isPosted = true,
-                isClosed = false,
-                isReviewed = false,
-            };
-            await context.Invoice.AddAsync(invoice);
 
             var unavailableItems = new List<string>();
             double totalNetPrice = 0;
@@ -53,6 +41,29 @@ namespace Infrastructure.Repositories
                     unavailableItems.Add(item.Items.Name);
                     continue;
                 }
+            }
+
+            var unvCount = unavailableItems.Count();
+            var numCartItems = carItems.Count();
+            if (unvCount == numCartItems) return "All items in cart Unavailable";
+
+            Invoice invoice = new Invoice()
+            {
+                Cus_Id = cusId,
+                CreatedAt = DateTime.Now,
+                NetPrice = 0,
+                Transaction_Type = 1,
+                Payment_Type = 1,
+                isPosted = true,
+                isClosed = false,
+                isReviewed = false,
+            };
+            await context.Invoice.AddAsync(invoice);
+
+            foreach(var item in carItems)
+            {
+
+                var itemStore = await context.InvItemStores.FirstOrDefaultAsync(i => i.Item_Id == item.Item_Id && i.Store_Id == item.Store_Id);
 
                 double unitPrice = item.Items.price;
                 double total = item.Quantity * unitPrice;
@@ -99,9 +110,40 @@ namespace Infrastructure.Repositories
             return $"Invoice Number : {invoice.Id} and total Price {totalNetPrice}";
         }
 
-        public Task<InvoiceRecieptDTO> GetInvoiceRecipt(int cusId, int invId)
+        public async Task<InvoiceRecieptDTO> GetInvoiceRecipt(int cusId, int invId)
         {
-            throw new NotImplementedException();
+            var invoice = await context.Invoice
+                .Include(i => i.Details)
+                .ThenInclude(it => it.Items)
+                .FirstOrDefaultAsync(i => i.Cus_Id == cusId && i.Id == invId);
+
+            if (invoice == null) return null;
+            double totalPrice = 0;
+            foreach(var item in invoice.Details)
+            {
+                double itemPrice = item.Quantity * item.price;
+                totalPrice += itemPrice;                
+            }
+
+            invoice.NetPrice = totalPrice;
+            await context.SaveChangesAsync();
+            var reciept = new InvoiceRecieptDTO
+            {
+                InvoiceId = invoice.Id,
+                CusId = cusId,
+                CreatedAt = DateTime.Now,
+                TotalPrice = totalPrice,
+                Items = await Task.WhenAll(invoice.Details.Select(async si => new InvoiceItemsDTO
+                {
+                    ItemName = si.Items.Name,
+                    PricePerUnit = si.Items.price,
+                    UnitName = (await context.Units.FirstOrDefaultAsync(u => u.Id == si.Unit_Id))?.Name ?? "Unknown",
+                    Quantity = si.Quantity,
+                    TotalPrice = si.Quantity * si.price
+                }))
+
+            };
+            return reciept;
         }
     }
 }
